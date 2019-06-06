@@ -1,0 +1,30 @@
+.layui-view-model{
+	display:none;
+}
+.layui-form[wid105] .layui-form-label{
+	width:105px
+}
+.layui-form[wid105] .layui-input-block{
+	margin-left:20px
+}
+@media screen and (max-width:450px){
+	.layui-form[wid105] .layui-form-item .layui-input-inline{
+		margin-left:182px
+	}
+	.layui-form[wid105] .layui-form-item .layui-input-inline+.layui-form-mid{
+		margin-left:180px
+	}
+}
+.layui-form .layui-required{
+	color: red;
+    width: 10px;
+    line-height: 38px;
+    text-align: center;
+}
+.layui-form .layui-input-block-flex{
+	display:flex;
+}
+.div-order-detail ul li{
+	height: 30px;
+    line-height: 30px;
+}

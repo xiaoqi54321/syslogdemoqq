@@ -1,0 +1,78 @@
+/* select */
+.select {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .select dt {
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #d2ccc4;
+    background: #fcfcfb;
+    line-height: 30px;
+    padding-left: 10px;
+    cursor: pointer;
+    padding-right: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    z-index: 99;
+    border-radius: 2px;
+  }
+  
+  .select dt:hover,
+  .select dt.cur {
+    border: 1px solid #409DFE;
+    box-shadow: 0 0 3px #409DFE;
+  }
+  
+  .select .cont {
+    position: absolute;
+    right: 0;
+    top: 36px;
+    background: #fff;
+    display: none;
+    z-index: 100;
+    border: 1px solid #d2d2d2;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+    box-sizing: border-box;
+  }
+  
+  .select dd ul {
+    max-height: 250px;
+  }
+  
+  .select dd ul li a {
+    line-height: 36px;
+    display: block;
+    padding: 0 8px;
+  }
+  
+  .select dd ul li a:hover {
+    background: #5fb878;
+    color: #fff;
+  }
+  
+  .btn-icon {
+    margin-right: 3px;
+    font-size: 14px;
+    vertical-align: bottom;
+    vertical-align: middle\9;
+    font-family: layui-icon !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .form-cont {
+    padding: 10px 15px;
+  }
+  
+  .title-input {
+    vertical-align: baseline;
+  }
+  
+  .title-input .layui-input {
+    height: 32px;
+  }

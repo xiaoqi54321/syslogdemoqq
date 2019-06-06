@@ -1,0 +1,39 @@
+server:
+  port: 8080
+  context-path: /rsyslog
+
+spring:
+#  freemarker:
+#    suffix: .html
+#    charset: UTF-8
+#    template-loader-path:
+#      -classpath:/templates
+#    content-type: text/html;charset=utf-8
+
+  datasource:
+    url: jdbc:mysql://10.254.199.52:3306/Syslog?serverTimezone=GMT&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: cmdi
+    password: hongdong123!@#
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maximum-pool-size: 1000
+      minimum-idle: 1000
+  mvc:
+    static-path-pattern: /layuiadmin/**
+    view:
+      prefix: /
+      suffix: .jsp
+  resources:
+    static-locations: classpath:/layuiadmin/
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml  # mybatis配置文件所在路径
+  #type-aliases-package: com.dzt.cloud.entities        # 所有entity别名类所在包
+  mapper-locations:
+    - classpath:mybatis/mapper/**/*.xml                 #mapper映射文件
+
+
+logging:
+  level:
+    com.dzt.demo.dao: DEBUG
+    root: info
+

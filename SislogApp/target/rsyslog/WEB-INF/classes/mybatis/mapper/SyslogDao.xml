@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dzt.demo.dao.SyslogDao" >
+
+    <select id="queryData" resultType="java.util.Map">
+        select * from SystemEvents limit 0,10
+    </select>
+
+    <select id="list" parameterType="map" resultType="java.util.Map">
+        select id,ReceivedAt,FromHost,accessingResources,accessingPathWay,
+        userName,fromIp,action,intranetIp,intranetPort,result
+        from  syslog
+        <where>
+            1=1
+            <if test="startTime != null and startTime != ''">and ReceivedAt  <![CDATA[>=]]> #{startTime}</if>
+            <if test="endTime != null and endTime != ''">and ReceivedAt  <![CDATA[<=]]>  #{endTime}</if>
+            <if test="FromHost != null and FromHost != ''">and FromHost = #{FromHost}</if>
+            <if test="accessingPathWay != null and accessingPathWay != ''">and accessingPathWay = #{accessingPathWay}</if>
+            <if test="result != null and result != ''">and result = #{result}</if>
+            <if test="fromIp != null and fromIp != ''">and fromIp = #{fromIp}</if>
+            <if test="intranetIp != null and intranetIp != ''">and intranetIp = #{intranetIp}</if>
+            <if test="intranetPort != null and intranetPort != ''">and intranetPort = #{intranetPort}</if>
+            <if test="userName != null and userName != ''">and userName = #{userName}</if>
+        </where>
+        order by ReceivedAt desc
+        limit #{startIndex},#{limit}
+    </select>
+
+    <select id="countSyslogList" resultType="int" parameterType="java.util.Map">
+         select COUNT(1) from  syslog
+        <where>
+            1=1
+            <if test="startTime != null and startTime != ''">and ReceivedAt  <![CDATA[>=]]> #{startTime}</if>
+            <if test="endTime != null and endTime != ''">and ReceivedAt  <![CDATA[<=]]>  #{endTime}</if>
+            <if test="FromHost != null and FromHost != ''">and FromHost = #{FromHost}</if>
+            <if test="accessingPathWay != null and accessingPathWay != ''">and accessingPathWay = #{accessingPathWay}</if>
+            <if test="result != null and result != ''">and result = #{result}</if>
+            <if test="fromIp != null and fromIp != ''">and fromIp = #{fromIp}</if>
+            <if test="intranetIp != null and intranetIp != ''">and intranetIp = #{intranetIp}</if>
+            <if test="intranetPort != null and intranetPort != ''">and intranetPort = #{intranetPort}</if>
+            <if test="userName != null and userName != ''">and userName = #{userName}</if>
+        </where>
+    </select>
+
+
+    <select id="deriveControl" parameterType="map" resultType="java.util.Map">
+        select id,ReceivedAt,FromHost,accessingResources,accessingPathWay,userName,
+        fromIp,action,intranetIp,intranetPort,result from syslog
+        <where>
+            1=1
+            <if test="intranetIp != null and intranetIp != ''">
+                and  intranetIp = #{intranetIp}
+                and ReceivedAt>=#{ReceivedAt}
+            </if>
+            <if test="intranetPort != null and intranetPort !='' ">
+                and intranetPort =#{intranetPort}
+            </if>
+        </where>
+        order by ReceivedAt desc
+        limit #{startIndex},#{limit}
+    </select>
+
+    <select id="countControl" resultType="int" parameterType="java.util.Map">
+        select count(1) from syslog slog
+        <where>
+            1=1
+            <if test="intranetIp != null and intranetIp !='' ">
+                and   slog.intranetIp =#{intranetIp}
+                and  slog.ReceivedAt >=#{ReceivedAt}
+            </if>
+            <if test="intranetPort != null and intranetPort !='' ">
+                and slog.intranetPort =#{intranetPort}
+            </if>
+        </where>
+    </select>
+
+
+
+    <!--统计数据-->
+    <select id="countData" parameterType="java.util.Map"  resultType="java.util.Map">
+        SELECT count(1) as sumdata,count(DISTINCT userName)as countUser ,count(DISTINCT fromIp) as countIp from syslog
+        <where>
+            1=1
+            <if test="intranetIp !=null and intranetIp !=''">
+                and intranetIp = #{intranetIp}
+            </if>
+            <if test="intranetPort !=null and intranetPort !=''">
+                and intranetPort = #{intranetPort}
+            </if>
+            <if test="ReceivedAt !=null and ReceivedAt !=''">
+                and ReceivedAt >= #{ReceivedAt}
+            </if>
+        </where>
+    </select>
+
+    <select id="countDataBySearch" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT count(1) as sumdata,count(DISTINCT userName) as countUser,count(DISTINCT fromIp)as countIp from syslog
+        <where>
+            1=1
+            <if test="startTime != null and startTime != ''">and ReceivedAt  <![CDATA[>=]]> #{startTime}</if>
+            <if test="endTime != null and endTime != ''">and ReceivedAt  <![CDATA[<=]]>  #{endTime}</if>
+            <if test="FromHost != null and FromHost != ''">and FromHost = #{FromHost}</if>
+            <if test="accessingPathWay != null and accessingPathWay != ''">and accessingPathWay = #{accessingPathWay}</if>
+            <if test="result != null and result != ''">and result = #{result}</if>
+            <if test="fromIp != null and fromIp != ''">and fromIp = #{fromIp}</if>
+            <if test="intranetIp != null and intranetIp != ''">and intranetIp = #{intranetIp}</if>
+            <if test="intranetPort != null and intranetPort != ''">and intranetPort = #{intranetPort}</if>
+            <if test="userName != null and userName != ''">and userName = #{userName}</if>
+        </where>
+    </select>
+
+
+</mapper>
